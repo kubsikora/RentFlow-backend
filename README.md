@@ -81,6 +81,7 @@ Nastepnie odnajdz plik php.ini i odkomentuj w nim:
 - extension=fileinfo
 - extension=mbstring
 - extension=openssl
+- extension=pdo_mysql
 
 Nastepnie w docelowym folderze zklonuj te repozytorium:
 
