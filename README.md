@@ -94,6 +94,17 @@ Po udanym klonowaniu użyj poniższej komendy by zinicjalizować backend:
 ```http
   composer install
 ```
+Dodatkowo znajdz plik zaczynajacy się .env exemple czy jakos tak, usuń reszte by było tylko '.env' nastepnie w sekcji z poczatkiem "DB" skonfiguruj połączenie z baza danych.
+Tak wygląda to u mnie:
+```http
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=rentflow
+  DB_USERNAME=root
+  DB_PASSWORD=zaq1@WSX
+```
+By połaczyć nasz aktualny backend z fontem użyj komendy `php artisan key:generate`.
 Gratulacje masz zainstalowany funkcjonujacy backend, możesz go teraz uruchomić za pomoca komendy `php artisan serve`. Nastepnym krokiem żeby RentFlow funkcjonował w pełni jest zklonowanie frontendu do naszego projektu. Aby to zrobic wejdz do foldera 
 `rentflow-front` w scieżce `\resources\js` i wykonaj poniższe komendy:
 
