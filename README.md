@@ -104,6 +104,7 @@ Tak wygląda to u mnie:
   DB_USERNAME=root
   DB_PASSWORD=zaq1@WSX
 ```
+Po ustawieniu bazy danych użyj komendy `php artisan migrate`, uaktualni to twoją baze z projektem.
 By połaczyć nasz aktualny backend z fontem użyj komendy `php artisan key:generate`.
 Gratulacje masz zainstalowany funkcjonujacy backend, możesz go teraz uruchomić za pomoca komendy `php artisan serve`. Nastepnym krokiem żeby RentFlow funkcjonował w pełni jest zklonowanie frontendu do naszego projektu. Aby to zrobic wejdz do foldera 
 `rentflow-front` w scieżce `\resources\js` i wykonaj poniższe komendy:
