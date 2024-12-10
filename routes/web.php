@@ -17,3 +17,6 @@ Route::get('/test', function () {
 Route::get('/user/exist/{login}', [UsersController::class, 'check']);
 Route::get('/user/store/{data}', [UsersController::class, 'storeOwner']);
 Route::get('/user/login/login={login}&password={password}', [UsersController::class, 'login']);
+Route::get('/account/settings/{data}', [UsersController::class, 'AccountDataChange']);
+Route::get('/dele/account/id={id}&password={password}', [UsersController::class, 'DeleteAccount']);
+Route::get('/account/prepersettings/{id}', [UsersController::class, 'GetAccountData']);

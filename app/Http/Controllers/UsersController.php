@@ -11,6 +11,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(function ($request, $next) {
+    //             header('Access-Control-Allow-Origin: *');
+    //             header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    //             header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+    //         return $next($request);
+    //     });
+    // }
+    
     public function check(string $login){
         $list = Users::where('login', $login)->get();
         if(count($list) == 0){
@@ -63,6 +73,70 @@ class UsersController extends Controller
             
         }
     }   
+    public function AccountDataChange(string $data)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+        $decodedData = urldecode($data);
+    
+        $dataArray = json_decode($decodedData, true);
+
+        $user = Users::where('id', $dataArray['id'])->first();
+        if(strlen($dataArray['passwordold']) > 0 && strlen($dataArray['passwordnew']) > 0){
+
+            if ($user && Hash::check($dataArray['passwordold'], $user->hash_password)) { 
+                $response = [
+                    'hash_password' => Hash::make($dataArray['passwordnew']),
+                    'email' => $dataArray['email'],
+                    'tel' => $dataArray['phone'],
+                ];
+                Users::where('id', $dataArray['id'])->update($response);
+                return 'OK';
+            } else {
+                return 'wrong password';
+            }
+                        
+        } else {
+            if($dataArray['email'] !== $user->email || $dataArray['phone'] !== $user->tel){
+                $response = [
+                    'email' => $dataArray['email'],
+                    'tel' => $dataArray['phone'],
+                ];
+                Users::where('id', $dataArray['id'])->update($response);
+
+                return 'OK';
+            }
+        }
+
+        return $dataArray;
+    }   
+
+    public function DeleteAccount(string $id, string $password)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+        $user = Users::where('id', $id)->first();
+        if ($user && Hash::check(substr($password, 1, -1), $user->hash_password)) { 
+            Users::where('id', $id)->delete();
+            return 'OK';
+        } else {
+            return 'wrong password';
+        }
+    }
+
+    public function GetAccountData(string $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+        $user = Users::where('id', $id)->get(['email', 'tel'])->first();
+        return $user;
+    }
 
     public function login(string $login, string $password)
     {
