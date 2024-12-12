@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PlacesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,3 +21,8 @@ Route::get('/user/login/login={login}&password={password}', [UsersController::cl
 Route::get('/account/settings/{data}', [UsersController::class, 'AccountDataChange']);
 Route::get('/dele/account/id={id}&password={password}', [UsersController::class, 'DeleteAccount']);
 Route::get('/account/prepersettings/{id}', [UsersController::class, 'GetAccountData']);
+Route::get('/get/owner/flats/id={id}', [PlacesController::class, 'getOwnerFlat']);
+Route::get('/get/owner/flats/info/id={id}', [PlacesController::class, 'getFlatData']);
+Route::get('/find/user/val={val}', [UsersController::class, 'GetUsers']);
+Route::get('/add/flats/id={id}&user={login}&data={data}&rooms={rooms}', [PlacesController::class, 'addToFlat']);
+Route::get('/save/flat/user&rooms={room}&to={to}&id={id}', [PlacesController::class, 'editResident']);
