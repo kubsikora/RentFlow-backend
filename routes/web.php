@@ -26,3 +26,5 @@ Route::get('/get/owner/flats/info/id={id}', [PlacesController::class, 'getFlatDa
 Route::get('/find/user/val={val}', [UsersController::class, 'GetUsers']);
 Route::get('/add/flats/id={id}&user={login}&data={data}&rooms={rooms}', [PlacesController::class, 'addToFlat']);
 Route::get('/save/flat/user&rooms={room}&to={to}&id={id}', [PlacesController::class, 'editResident']);
+
+Route::get('/counters/get/counters/place_id={place_id}', [CountersController::class, 'getPlaceLastCountersRead']);
