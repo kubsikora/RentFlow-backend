@@ -17,14 +17,15 @@ return new class extends Migration
             $table->string('type', 1);
             $table->string('operator');
             $table->string('unit', 5);
+            $table->float('cost');
             $table->timestamps();
         });
 
         DB::table('counters')->insert([
-            ['id' => 1, 'name' => 'energy', 'type' => 'E', 'operator' => 'TAURON', 'unit' => 'kWh', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 2, 'name' => 'water', 'type' => 'W', 'operator' => 'PWIK', 'unit' => 'm3', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 3, 'name' => 'gas', 'type' => 'G', 'operator' => 'PGNIG', 'unit' => 'm3', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 4, 'name' => 'heat', 'type' => 'H', 'operator' => 'NAN', 'unit' => 'GJ', 'created_at' => now(), 'updated_at' => now()]
+            ['id' => 1, 'name' => 'energy', 'type' => 'E', 'operator' => 'TAURON', 'unit' => 'kWh','cost' => 0.93, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 2, 'name' => 'water', 'type' => 'W', 'operator' => 'PWIK', 'unit' => 'm3','cost' => 21.34, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'name' => 'gas', 'type' => 'G', 'operator' => 'PGNIG', 'unit' => 'm3','cost' => 2.63, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'name' => 'heat', 'type' => 'H', 'operator' => 'NAN', 'unit' => 'GJ','cost' => 150.95, 'created_at' => now(), 'updated_at' => now()]
         ]);
 
         Schema::create('counters_data', function (Blueprint $table) {
