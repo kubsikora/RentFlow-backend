@@ -34,4 +34,4 @@ Route::get('/get/flats$owner={owner}&id={id}', [PlacesController::class, 'getall
 
 
 //messeges 
-Route::get('/message/add&messege={messege}&to={to}&level={level}', [MessegesController::class, 'add']);
+Route::get('/message/add&messege={messege}&to={to}&level={level}&idPlace=${idPlace}$from=${from}', [MessegesController::class, 'add']);
