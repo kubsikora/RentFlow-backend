@@ -22,6 +22,10 @@ class UsersController extends Controller
     // }
     
     public function check(string $login){
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
         $list = Users::where('login', $login)->get();
         if(count($list) == 0){
             return 0;
@@ -32,6 +36,10 @@ class UsersController extends Controller
     
     public function storeOwner(string $data)
     {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
         $decodedData = urldecode($data);
     
         $dataArray = json_decode($decodedData, true);
@@ -140,6 +148,10 @@ class UsersController extends Controller
 
     public function login(string $login, string $password)
     {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        
         $user = Users::where('login', $login)->first();
         unset($user['tel']);
         unset($user['deleted_at']);
