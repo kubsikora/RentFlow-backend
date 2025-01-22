@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessegesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\UsersController;
@@ -28,3 +29,9 @@ Route::get('/add/flats/id={id}&user={login}&data={data}&rooms={rooms}', [PlacesC
 Route::get('/save/flat/user&rooms={room}&to={to}&id={id}', [PlacesController::class, 'editResident']);
 
 Route::get('/counters/get/counters/place_id={place_id}', [CountersController::class, 'getPlaceLastCountersRead']);
+
+Route::get('/get/flats$owner={owner}&id={id}', [PlacesController::class, 'getallflats']);
+
+
+//messeges 
+Route::get('/message/add&messege={messege}&to={to}&level={level}', [MessegesController::class, 'add']);

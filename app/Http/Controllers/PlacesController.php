@@ -82,4 +82,36 @@ class PlacesController extends Controller
             UserPlaces::where('resident_id', $id)->update(['rooms'=> $room]);
         }
     }
+
+    public function getallflats(string $owner, string $id)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+        if($owner == 'false'){
+            $places = Places::where('owner_id', $id)->get(['city', 'zipcode', 'street', 'house_nr', 'flat_nr', 'id'])
+                ->map(function ($item) {
+                    return [ 'name'=>$item->city . ', ' . $item->zipcode . ', ' . $item->street . ', ' . $item->house_nr . ' / ' . $item->flat_nr, 'id'=>$item->id];
+                });
+
+            return $places;
+        } else {
+            $places = UserPlaces::where('resident_id', $id)
+            ->get()
+            ->map(function ($item) {
+                $placeData = Places::where('id', $item->place_id)
+                                    ->get(['city', 'zipcode', 'street', 'house_nr', 'flat_nr', 'id'])
+                                    ->map(function ($place) {
+                                        return $place->city . ', ' . $place->zipcode . ', ' . $place->street . ', ' . $place->house_nr . ' / ' . $place->flat_nr;
+                                    })
+                                    ->first(); // Zakładając, że potrzebujesz tylko jednego ciągu danych miejsca
+
+                return ['name'=>$placeData, 'id'=>$item->place_id];
+            });
+
+        return $places;
+
+        }
+    }
 }
